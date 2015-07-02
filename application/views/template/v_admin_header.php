@@ -27,13 +27,18 @@
 						<span class="icon-bar"></span>
 					</a>
 					
-					<a class="brand" href="<?php echo site_url(); ?>">HowFramework</a>
+					<a class="brand" href="<?php echo site_url(); ?>">Lost and Found</a>
 					
 					<div class="nav-collapse">
 						<ul class="nav">
-							<li class="active"><a href="<?php echo site_url(); ?>">Visit Site</a></li>
+							<li class="active"><a href="<?php echo site_url(); ?>">Home</a></li>
+							<li><a href="#">Lost</a></li>
+							<li><a href="#">Found</a></li>
+							<li><a href="home/post">Post</a></li>
+							<li><a href="#about">About</a></li>
+							<li><a href="#contact">Contact</a></li>
 						</ul>
-					</div><!--/.nav-collapse -->
+					</div> 
 
 					<?php if (isset($user['username']) && ($user['username'] != '')) { ?>
 					  <div class="btn-group pull-right">

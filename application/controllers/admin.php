@@ -15,6 +15,7 @@ class Admin extends CI_Controller {
 		header("Pragma: no-cache");		
 		
 		$this->load->model('m_user');
+//		$this->load->model('m_lostfound');
 		
 		if ($this->m_user->is_logged_in() === FALSE) { 
 			$this->m_user->remove_pass();

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Blog extends CI_Controller {
+class Home extends CI_Controller {
 	var $data = array();
 
     function __construct()
@@ -12,9 +12,15 @@ class Blog extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('blog/v_blog_home');
+		$this->load->view('home');
 	}
-	
+
+	public function post() {
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		
+		$this->load->view('post');
+	}
 
 }
 

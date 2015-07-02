@@ -6,7 +6,7 @@
 	 $fullname_error = ( trim(form_error('fullname')) != '' ) ? ' error' : '';
 ?>
 <?php $this->load->view('template/v_admin_header.php'); ?>
-					<div class="span12 well" style="margin-top: 20px;">
+					<div class="span12 well" style="margin-top: 40px; margin-left: 200px; width: 50%">
 <form class="form-horizontal" method="post" action="<?php echo site_url('register'); ?>">
   <fieldset>
     <legend>Register</legend>
