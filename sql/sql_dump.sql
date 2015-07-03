@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `lost` (
   `date` DATETIME,
   `location` varchar(50), 
   `person` varchar(20),
-  `contact` varchar(50),
+  `email` varchar(50),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `found` (
   `date` DATETIME,
   `location` varchar(50), 
   `person` varchar(20),
-  `contact` varchar(50),
+  `email` varchar(50),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

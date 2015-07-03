@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class M_user extends CI_Model {
+class M_lostfound extends CI_Model {
 
 	var $offsets;    // should ba saved in user-specific session
 	var $limit = 5;  // mysql query limit
@@ -31,7 +31,7 @@ class M_user extends CI_Model {
 	
 	// get user by username
 	function get_stuff( $table ) {
-		$query = "select * from " $table . " limit " . $offsets[$table] . "," . $limit;
+		$query = "select * from " .$table. " limit " .$offsets[$table]. "," .$limit;
 		$result = $this->db->query($query);
 		$rows = $result->num_rows(); 
 		if( $rows > 0 ) {

@@ -22,21 +22,13 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 				</a>
-				<div class="nav-collapse">
-					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Lost</a></li>
-						<li><a href="#">Found</a></li>
-						<li><a href="home/post">Post</a></li>
-						<li><a href="#about">About</a></li>
-						<li><a href="#contact">Contact</a></li>
-					</ul>
-				</div>
-				<!--/.nav-collapse -->
+				
+				<?php $this->load->view('template/v_nav_menu.php');?>
 
 				<div class="btn-group pull-right">
 					<a class="btn" href="<?php echo site_url('login'); ?>"> <i
@@ -103,20 +95,5 @@
 						morbi tristique senectus et netus et malesuada fames ac turpis
 						egestas.</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	<footer class="navbar-fixed-bottom">
-		<div class="container">
-			<div class="row">
-				<div class="span6">&copy; Copyright 2015 Designed by ..</div>
-				<div class="span6"></div>
-			</div>
-		</div>
-	</footer>
-	<!-- JS -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script src="<?php echo base_url('js/bootstrap.min.js');?>"></script>
-</body>
-</html>
+			
+<?php $this->load->view('template/v_admin_footer.php');?>

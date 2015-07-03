@@ -2,8 +2,8 @@
 $username_error = (trim ( form_error ( 'username' ) ) != '') ? ' error' : '';
 $password_error = (trim ( form_error ( 'password' ) ) != '') ? ' error' : '';
 
+$this->load->view('template/v_admin_header.php'); 
 ?>
-<?php $this->load->view('template/v_admin_header.php'); ?>
 
 <div class="span12 well" style="margin-top: 100px; margin-left: 300px; width: 40%">
 

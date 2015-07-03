@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>HowFrameWork</title>
+		<title>LostFound</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
     	<meta name="author" content="">
@@ -29,16 +29,7 @@
 					
 					<a class="brand" href="<?php echo site_url(); ?>">Lost and Found</a>
 					
-					<div class="nav-collapse">
-						<ul class="nav">
-							<li class="active"><a href="<?php echo site_url(); ?>">Home</a></li>
-							<li><a href="#">Lost</a></li>
-							<li><a href="#">Found</a></li>
-							<li><a href="home/post">Post</a></li>
-							<li><a href="#about">About</a></li>
-							<li><a href="#contact">Contact</a></li>
-						</ul>
-					</div> 
+					<?php $this->load->view('template/v_nav_menu.php');?>
 
 					<?php if (isset($user['username']) && ($user['username'] != '')) { ?>
 					  <div class="btn-group pull-right">
