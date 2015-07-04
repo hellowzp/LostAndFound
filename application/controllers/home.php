@@ -5,8 +5,8 @@ class Home extends CI_Controller {
     function __construct() {
         parent::__construct();	
         
-        $this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation');
+        $this->load->helper(array('form', 'url', 'file'));
+		$this->load->library('form_validation', 'upload');
 		$this->load->model('m_lostfound');
 		
 		session_start();
