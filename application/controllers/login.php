@@ -29,9 +29,14 @@ class Login extends CI_Controller {
 			if ($user = $this->m_user->get_by_username($username)) {
 				if ($this->m_user->check_password( $password, $user['password'] )) {
 					$this->m_user->allow_pass( $user );
+					$_SESSION['username'] = $username;
 					redirect('admin');
-				} else { $this->data['login_error'] = 'Invalid username or password'; }
-			} else { $this->data['login_error'] = 'Username not found'; }
+				} else { 
+					$this->data['login_error'] = 'Invalid username or password'; 
+				}
+			} else { 
+				$this->data['login_error'] = 'Username not found'; 
+			}
 		}
 		$this->load->view('login/v_login', $this->data);
 	}
@@ -65,6 +70,8 @@ class Login extends CI_Controller {
 		$this->m_user->remove_pass();
 		$this->data['login_success'] = 'You have been logged out. Thank you.';
 		$this->load->view('login/v_login', $this->data);
+		
+		$_SESSION['username'] = '';
 	}
 	
 	// noaccess to show no access message

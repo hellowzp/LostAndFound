@@ -7,6 +7,9 @@ class Home extends CI_Controller {
         
         $this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
+		$this->load->model('m_lostfound');
+		
+		session_start();
     }
 
 	public function index() {
@@ -14,15 +17,22 @@ class Home extends CI_Controller {
 	}
 	
 	public function lost($category="all") {
-		$this->load->view('lost',$category);
+		$this->lost_found("lost");
 	}
 	
 	public function found($category="all") {
-		$this->load->view('found',$category);
+		$this->lost_found("found");
 	}
 
 	public function post() {		
 		$this->load->view('post');
+	}
+	
+	private function lost_found($table) {
+		$results = $this->m_lostfound->get_stuff($table);
+//		var_dump($results);
+		$data = array( 'data' => $results);
+		$this->load->view('lost_found',$data);
 	}
 
 }

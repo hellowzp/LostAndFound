@@ -3,7 +3,7 @@
 </div>
 </div>
 
-<footer class="navbar-fixed-bottom">
+<footer class="navbar-fixed-bottom" style="padding: 5px 0;">
 	<div class="container">
 		<div class="row">
 			<div class="span6">&copy; Copyright 2015</div>

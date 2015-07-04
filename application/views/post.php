@@ -14,7 +14,7 @@
 	.error { color: red; }
 </style>
 
-<div class="span12 well" style="margin-top: 30px; margin-left: 300px; padding: 2px 15px; width: 40%">
+<div class="span12 well" style="margin-top: 50px; margin-left: 300px; padding: 2px 15px; width: 40%">
 
 <?php  $isChecked = array();
 	if ( isset($table) && $table == 'Found') {

@@ -6,9 +6,7 @@ class M_lostfound extends CI_Model {
 	var $limit = 5;  // mysql query limit
 	var $max_idle_time = 300; // allowed idle time in secs
 
-    function __construct()
-    {
-        // Call the Model constructor
+    function __construct() {
         parent::__construct();
         $offsets = array( 'lost' => 0, 'found' => 0 );
     }
@@ -31,11 +29,10 @@ class M_lostfound extends CI_Model {
 	
 	// get user by username
 	function get_stuff( $table ) {
-		$query = "select * from " .$table. " limit " .$offsets[$table]. "," .$limit;
+//		$query = "select * from " .$table. " limit " .$this->offsets[$table]. "," .$this->limit;
+		$query = "select * from " .$table;
 		$result = $this->db->query($query);
-		$rows = $result->num_rows(); 
-		if( $rows > 0 ) {
-			$offsets[$table] += rows;
+		if( $result->num_rows() > 0 ) {
 			return $result->result_array();
 		}
 		return false;
