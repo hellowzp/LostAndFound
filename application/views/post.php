@@ -32,63 +32,55 @@
 	color: red;
 }
 
-input[type="file"]#fileElem {
+/* http://codepen.io/escapist/pen/enkDl */
+input[type="file"] #fileElem {
 	/* Note: display:none on the input won't trigger the click event in WebKit.
-       Setting visibility to hidden and width 0 works.*/
+       Setting visibility to hidden and width 0 works. */
 	visibility: hidden;
 	width: 0;
-	height: 0;
+	height: 0; 
 }
 
-#fileSelect {
-	/*
-  color: #08233e;
-  font-size: 18pt;
-  padding: 12px;
-  background: -webkit-gradient(linear, left top, left bottom,
-      color-stop(0.5, rgba(255,255,255,0.3)), color-stop(0.5, #ffcc00), to(#ffcc00));
-  background: -webkit-linear-gradient(top, rgba(255,255,255,0.3) 50%, #ffcc00 50%, #ffcc00);
-  background: -moz-linear-gradient(top, rgba(255,255,255,0.3) 50%, #ffcc00 50%, #ffcc00);
-  background: -ms-linear-gradient(top, rgba(255,255,255,0.3) 50%, #ffcc00 50%, #ffcc00);
-  background: -o-linear-gradient(top, rgba(255,255,255,0.3) 50%, #ffcc00 50%, #ffcc00);
-  background: linear-gradient(top, rgba(255,255,255,0.3) 50%, #ffcc00 50%, #ffcc00);
-  background-color: #ffcc00;
-  border: 1px solid #ffcc00;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -o-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px;
-  border-bottom: 1px solid #9f9f9f;
-  -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
-  -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
-  -o-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
-  -ms-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
-  cursor: pointer;
-  text-shadow: 0 1px #fff; */
+.input-panel {
+	float: left;
+	width: 40%;
 }
 
-#fileSelect:hover {
-	/*
-  background: -webkit-gradient(linear, left top, left bottom,
-                               color-stop(0, #fff), color-stop(0.7, #ffcc00),
-                               to(#ffcc00));
-  background: -webkit-linear-gradient(top, #fff, #ffcc00 70%, #ffcc00);
-  background: -moz-linear-gradient(top, #fff, #ffcc00 70%, #ffcc00);
-  background: -o-linear-gradient(top, #fff, #ffcc00 70%, #ffcc00);
-  background: -ms-linear-gradient(top, #fff, #ffcc00 70%, #ffcc00);
-  background: linear-gradient(top, #fff, #ffcc00 70%, #ffcc00); */
+.image-panel {
+	float: right;
+	width: 60%;
 }
 
-#fileSelect:active {
-	position: relative;
-	top: 2px;
+.image-panel .uploader
+{
+	border: 2px dotted #A5A5C7;
+	width: 100%;
+	height: 290px;
+	color: #92AAB0;
+	text-align: center;
+	vertical-align: middle;
+	padding: 0;
+	margin-bottom: 5px;
+	margin-right: 3px;
+	font-size: 200%;
+
+	cursor: default;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;	
 }
+
+/* align button text
+input[type="file"] {
+	line-height: 10px;
+} */
 </style>
 
-<div class="span12 well"
-	style="margin-top: 50px; margin-left: 350px; padding: 2px 15px; width: 40%">
+<div class="well" style="margin-top: 50px; margin-left: 150px; padding: 2px 15px; width: 70%">
 
 <?php  $isChecked = array();
 	if ( isset($table) && $table == 'Found') {
@@ -113,7 +105,7 @@ input[type="file"]#fileElem {
 	<?php 
 	$attr = array(
 		'class' => "form",
-//		'enctype' => "multipart/form-data", // used for post binary data such as a file
+		'enctype' => "multipart/form-data", // used for post binary data such as a file
 		'style' => "padding: 0;"
 	);
 	echo form_open( 'post_handler', $attr); 
@@ -122,87 +114,93 @@ input[type="file"]#fileElem {
 		<fieldset>
 		<legend style="margin-bottom: 15px;">New Post</legend>
 
-		<div class="field">
-			<label for="type">Category</label>
-			<input type="radio" name="type" value="Lost" <?php echo $isChecked['lost']?>><span>Lost</span>
-			<input type="radio" name="type" value="Found" <?php echo $isChecked['found']?>><span>Found</span>
-		</div>
+		<div class="input-panel">
+			<div class="field">
+				<label for="type">Category</label> <input type="radio" name="type"
+					value="Lost" <?php echo $isChecked['lost']?>><span>Lost</span> <input
+					type="radio" name="type" value="Found"
+					<?php echo $isChecked['found']?>><span>Found</span>
+			</div>
 
-		<div class="field">
-			<label for="name">Name</label> <input name="name" type="text"
-				size="50" autofocus value="<?php echo $db['name']; ?>">
-		</div>
+			<div class="field">
+				<label for="name">Name</label> <input name="name" type="text"
+					size="50" autofocus value="<?php echo $db['name']; ?>">
+			</div>
 
-		<div class="field">
-			<label for="location">Description</label> <input type="text"
-				name="description" value="<?php echo $db['description']; ?>">
-		</div>
+			<div class="field">
+				<label for="location">Description</label> <input type="text"
+					name="description" value="<?php echo $db['description']; ?>">
+			</div>
 
-		<div class="field">
-			<label for="image">Image</label>
-			<input type="text" name="image" id="imageName"
-				value="<?php echo $db['image']; ?>">
-			<input type="file" accept="image/*"
-				id="fileElem" multiple onchange="handleFiles(this.files)">
-			<button id="fileSelect" type="button" 
-				style="margin-bottom: 5px; margin-left: 5px;">Browse</button>
-		</div>
-		
-		<script>
-			var fileInput = document.querySelector('#fileElem');
-			var fileButton = document.querySelector('#fileSelect');
-			var fileText = document.querySelector('#imageName');
+			<div class="field">
+				<label for="image">Image</label>
+				<input type="text" name="image"
+					id="imageText" readOnly value="<?php echo $db['image']; ?>">
+			</div>
+
+			<div class="field">
+				<label>Date</label> <input type="date" name="date"
+					value="<?php echo $db['date']; ?>">
+			</div>
+
+			<div class="field">
+				<label>Location</label> <input type="text" name="location"
+					value="<?php echo $db['location']; ?>">
+			</div>
+
+			<div class="field">
+				<label>Email</label> <input type="text" name="email"
+					value="<?php echo $db['email']; ?>">
+			</div>
 			
-			function click(el) {
-			    // Simulate click on the element.
-			    var evt = document.createEvent('Event');
-			    evt.initEvent('click', true, true);
-			    el.dispatchEvent(evt);
-			}
+			<div class="field" style="padding-left: 45%;">
+				<input type="submit" value="Submit" />
+			</div>
 			
-			fileButton.addEventListener('click', function(e) {
-			    //click(fileInput); // Simulate the click with a custom event.
-			    fileInput.click(); // Or, use the native click() of the file input.
-			}, false);
+		</div>
+
+		<div class="image-panel">
+			<div class="uploader">
+				<div style="margin-top: 30%">Image Preview</div>
+			</div>
 			
-			function handleFiles(files) {
-			    fileText.value = files[0].name;
-// 			    alert("ajax");
-//			    console.log(files[0]);
-			    
-// 			    $.ajax({
-// 	                url: "../post_handler/upload",
-// 	                dataType: 'text',    // accept from server
-// 	                enctype: 'multipart/form-data',
-// 	                contentType: "false",  // don't set content type
-// 	                processData: false,
-// 	                data: files[0],                         
-// 	                type: 'post',
-// 	                success: function(data){
-// 	                    alert(data); 
-// 	                }
-// 	     		});
-			}
-		</script>	
+			<div class="browser">
+				<input type="file" id="fileElem" accept="image/*" name="imgFile"
+					style="visibility: hidden; width: 0; height: 0;" onchange="handleFiles(this.files)">
+	  			<button type="button" id="fileSelect" style="margin:1px 0 0 45%;">Browse</button>
+			</div>
+			
+			<script type="text/javascript">			
+				var fileInput = document.querySelector('#fileElem');
+				var fileButton = document.querySelector('#fileSelect');
+				var fileText = document.querySelector('#imageText');
 
-		<div class="field">
-			<label>Date</label> <input type="date" name="date"
-				value="<?php echo $db['date']; ?>">
-		</div>
+				var imageContainer = $('.uploader');
 
-		<div class="field">
-			<label>Location</label> <input type="text" name="location"
-				value="<?php echo $db['location']; ?>">
-		</div>
+				function click(el) {
+				    // Simulate click on the element.
+				    var evt = document.createEvent('Event');
+				    evt.initEvent('click', true, true);
+				    el.dispatchEvent(evt);
+				}
 
-		<div class="field">
-			<label>Email</label> <input type="text" name="email"
-				value="<?php echo $db['email']; ?>">
-		</div>
+				fileButton.addEventListener('click', function(e) {
+				    //click(fileInput); // Simulate the click with a custom event.
+				    fileInput.click();  // Or, use the native click() of the file input.
+				}, false);
 
-		<div class="field" style="padding-left: 200px;">
-			<input type="submit" value="Submit" />
-		</div>
+				function handleFiles(files) {
+				    fileText.value = files[0].name;
+
+				    var reader = new FileReader();
+				    reader.onload = function(e) {
+				    	imageContainer.html('<img src="' + e.target.result + '" width=100% height=100%/>');
+				    };
+				    reader.readAsDataURL(files[0]);
+				}
+	    	</script>
+    	
+		</div>		
 
 	</fieldset>
 	</form>

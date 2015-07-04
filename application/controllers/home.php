@@ -32,7 +32,7 @@ class Home extends CI_Controller {
 		$results = $this->m_lostfound->get_stuff($table);
 //		var_dump($results);
 		$data = array( 'data' => $results);
-		$this->load->view('lost_found',$data);
+		$this->load->view('lost_found', $data);
 	}
 
 }

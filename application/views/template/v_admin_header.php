@@ -9,7 +9,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<link href="<?php echo base_url('css/bootstrap.css');?>" rel="stylesheet">
+<link href="<?php echo base_url('css/bootstrap.min.css');?>" rel="stylesheet">
 <link href="<?php echo base_url('css/style.css');?>" rel="stylesheet">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->

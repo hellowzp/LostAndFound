@@ -9,15 +9,25 @@ class Post_Handler extends CI_Controller {
         $this->load->model('m_lostfound');
 
         $this->data = array();    
-        $this->img_ID = 1;
+        $this->img_ID = 0;
+        
+        $config ['upload_path'] = base_url() . 'img';
+        $config ['allowed_types'] = 'gif|jpg|jpeg|png';
+        $config ['max_size'] = '4096';  //KB
+        $config ['max_width'] = '1024';
+        $config ['max_height'] = '768';
+        
+        $this->load->library ( 'upload', $config );
     }
 
 	public function index() {
 		
 		$this->form_validation->set_rules('name', 'Name', 'required');
 		$this->form_validation->set_rules('email', 'Email', 'trim|xss_clean|valid_email');
+		$this->form_validation->set_rules('image', "Image", 'callback_upload_file_check');
 		
-//		var_dump($_POST);
+// 		var_dump($_FILES);
+// 		var_dump($_POST);
 
 		$this->data['table'] = $this->input->post('type');
 		$this->data['db'] = array(
@@ -30,6 +40,8 @@ class Post_Handler extends CI_Controller {
 		);
 		
 		if ($this->form_validation->run()) {			
+			$this->img_ID ++;
+			$this->data['db']['image'] = '' . $this->img_ID .'_'. $this->data['db']['image'];
 			if ( $this->m_lostfound->save($this->data['table'], $this->data['db']) ) {
 				$this->data['success'] = 'Post Succeed! Click here to see your new <a href="'
 					.site_url("home/".$this->data["table"]). '">'.$this->data["table"].'</a> post.';
@@ -41,30 +53,12 @@ class Post_Handler extends CI_Controller {
 		$this->load->view('post', $this->data);
 	}
 	
-	public function do_upload() {
-		$config ['upload_path'] = base_url() . 'img';
-		$config ['allowed_types'] = 'gif|jpg|jpeg|png';
-		$config ['max_size'] = '4096';  //KB
-		$config ['max_width'] = '1024';
-		$config ['max_height'] = '768';
-		
-		$this->load->library ( 'upload', $config );
-		
-		if (! $this->upload->do_upload ()) {
-			$this->data['error'] = $this->upload->display_errors(); 
-			$this->load->view ( 'post', $this->data );
-		} else {
-			$this->data['upload_data'] = $this->upload->data();
-		}
-
-		$this->load->view('post', $this->data);		
-	}
-	
-	public function upload() {
-		var_dump($_FILES);
-		var_dump($_POST);
+	public function upload_file_check() {
 		$file = $_FILES['imgFile'];
-		$file_name = ($this->img_ID++) . '_' . $file['name'];
-		echo $file_name;
-	}
+		if( $file && $file['size'] > 4096000 ){
+			$this->form_validation->set_message('upload_file_check', 'The allowed maximum image size is 4MB');
+			return false;
+		} 
+		return true;
+	}	
 }
