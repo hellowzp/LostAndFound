@@ -42,12 +42,22 @@ class Post_Handler extends CI_Controller {
 		if ($this->form_validation->run()) {			
 			$this->img_ID ++;
 			$this->data['db']['image'] = '' . $this->img_ID .'_'. $this->data['db']['image'];
-			if ( $this->m_lostfound->save($this->data['table'], $this->data['db']) ) {
-				$this->data['success'] = 'Post Succeed! Click here to see your new <a href="'
-					.site_url("home/".$this->data["table"]). '">'.$this->data["table"].'</a> post.';
-			} else { 
-				$this->data['error'] = 'Sorry, post failed. Please contact the administrator.'; 
-			}			
+			
+			$source_temp = $_FILES['imgFile']['tmp_name'];
+			//target must be file system path instead of url connection like http://domain/path
+			$target_path = dirname( dirname( dirname(__FILE__) ) )
+						 . '/img/uploads/'
+						 . $this->data['db']['image'];
+			
+			if( move_uploaded_file($source_temp, $target_path)) {
+				if ( $this->m_lostfound->save( $this->data['table'], $this->data['db']) ) {
+					$this->data['success'] = 'Post Succeed! Click here to see your new '
+										   . '<a href="' .site_url("home/".$this->data["table"])
+										   . '">' . $this->data["table"] . '</a> post.';
+				} else { 
+					$this->data['error'] = 'Sorry, post failed. Please contact the administrator.'; 
+				}	
+			}		
 		} 
 		
 		$this->load->view('post', $this->data);

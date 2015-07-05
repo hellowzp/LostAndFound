@@ -10,6 +10,7 @@ class Home extends CI_Controller {
 		$this->load->model('m_lostfound');
 		
 		session_start();
+		$_SESSION['active-nav'] = 'home';
     }
 
 	public function index() {
@@ -17,22 +18,31 @@ class Home extends CI_Controller {
 	}
 	
 	public function lost($category="all") {
+		$_SESSION['active-nav'] = 'lost';
 		$this->lost_found("lost");
 	}
 	
 	public function found($category="all") {
+		$_SESSION['active-nav'] = 'found';
 		$this->lost_found("found");
 	}
 
-	public function post() {		
-		$this->load->view('post');
+	public function post($category="lost") {		
+		$data = array( 'table' => $category);
+		$_SESSION['active-nav'] = 'post';
+		$this->load->view('post', $data);
 	}
 	
 	private function lost_found($table) {
 		$results = $this->m_lostfound->get_stuff($table);
 //		var_dump($results);
-		$data = array( 'data' => $results);
+		//wrap the results in another array
+		$data = array( 'data' => $results, 'table' => $table);
 		$this->load->view('lost_found', $data);
+	}
+	
+	public function show_details($image='') {
+		
 	}
 
 }

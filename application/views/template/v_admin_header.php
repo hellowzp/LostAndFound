@@ -62,13 +62,13 @@ body {
 				<div class="span6" style="margin-left: 0; font-size: 24px;">
 					<a class="brand text-custom" href="<?php echo site_url(); ?>">Lost and Found</a>
 				</div>
-		
+
 				<div class="nav-collapse">
 					<ul class="nav" style="margin-left: 100px;">
-						<li class="active-custom"><a href="<?php echo site_url(); ?>">Home</a></li>
-						<li><a class="text-custom" href="<?php echo site_url() . 'home/lost'; ?>">Lost</a></li>
-						<li><a class="text-custom" href="<?php echo site_url() . 'home/found'; ?>">Found</a></li>
-						<li><a class="text-custom" href="<?php echo site_url() . 'home/post'; ?>">Post</a></li>
+						<li><a href="<?php echo site_url(); ?>" class="<?php echo $_SESSION['active-nav'] == 'home' ? "active-custom" : "text-custom";?>">Home</a></li>
+						<li><a class="<?php echo $_SESSION['active-nav'] == 'lost' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/lost'; ?>">Lost</a></li>
+						<li><a class="<?php echo $_SESSION['active-nav'] == 'found' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/found'; ?>">Found</a></li>
+						<li><a class="<?php echo $_SESSION['active-nav'] == 'post' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/post'; ?>">Post</a></li>
 						<li><a class="text-custom" href="#search">Search</a></li>
 					</ul>
 				</div>			

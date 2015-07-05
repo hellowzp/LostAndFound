@@ -83,7 +83,7 @@ input[type="file"] {
 <div class="well" style="margin-top: 50px; margin-left: 150px; padding: 2px 15px; width: 70%">
 
 <?php  $isChecked = array();
-	if ( isset($table) && $table == 'Found') {
+	if( $table == 'found') {
 		 $isChecked['lost'] = '';
 		 $isChecked['found'] = 'checked';
 	} else {
@@ -116,9 +116,10 @@ input[type="file"] {
 
 		<div class="input-panel">
 			<div class="field">
-				<label for="type">Category</label> <input type="radio" name="type"
-					value="Lost" <?php echo $isChecked['lost']?>><span>Lost</span> <input
-					type="radio" name="type" value="Found"
+				<label for="type">Category</label>
+				<input type="radio" name="type" value="lost" 
+					<?php echo $isChecked['lost']?>><span>Lost</span>
+				<input type="radio" name="type" value="found"
 					<?php echo $isChecked['found']?>><span>Found</span>
 			</div>
 
@@ -134,7 +135,7 @@ input[type="file"] {
 
 			<div class="field">
 				<label for="image">Image</label>
-				<input type="text" name="image"
+				<input type="text" name="image" title="clock the Browse button to upload a image"
 					id="imageText" readOnly value="<?php echo $db['image']; ?>">
 			</div>
 
