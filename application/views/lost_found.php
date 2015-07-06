@@ -86,7 +86,7 @@ http://philipwalton.com/articles/what-no-one-told-you-about-z-index/
 				<p class="text"><?php echo $description;?></p>
 			</div>
 			<div class="galleryBox">
-				<a target="_blank" href="<?php echo site_url('home/show_details') .'/'. $row['image'];?>">
+				<a target="_blank" href="<?php echo site_url('home/show_details') .'/'. $table .'/'. $row['image'];?>">
 					<img class="thumbnail" 
 						 alt="<?php echo $name;?>" 
 						 src="<?php echo $image;?>"

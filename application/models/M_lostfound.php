@@ -33,7 +33,7 @@ class M_lostfound extends CI_Model {
 		return false;
 	}
 	
-	function get_details( $table, $image) {
+	function show_details( $table, $image) {
 		$query = $this->db->get_where($table, array('image' => $image), 1);
 		if( $query->num_rows() > 0 ) return $query->row_array();
 		return false;
