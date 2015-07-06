@@ -65,15 +65,15 @@ body {
 
 				<div class="nav-collapse">
 					<ul class="nav" style="margin-left: 100px;">
-						<li><a href="<?php echo site_url(); ?>" class="<?php echo $_SESSION['active-nav'] == 'home' ? "active-custom" : "text-custom";?>">Home</a></li>
-						<li><a class="<?php echo $_SESSION['active-nav'] == 'lost' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/lost'; ?>">Lost</a></li>
-						<li><a class="<?php echo $_SESSION['active-nav'] == 'found' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/found'; ?>">Found</a></li>
-						<li><a class="<?php echo $_SESSION['active-nav'] == 'post' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/post'; ?>">Post</a></li>
+						<li><a class="<?php echo $this->session->userdata('active-nav') == 'home' ? "active-custom" : "text-custom";?>" href="<?php echo site_url(); ?>">Home</a></li>
+						<li><a class="<?php echo $this->session->userdata('active-nav') == 'lost' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/lost'; ?>">Lost</a></li>
+						<li><a class="<?php echo $this->session->userdata('active-nav') == 'found' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/found'; ?>">Found</a></li>
+						<li><a class="<?php echo $this->session->userdata('active-nav') == 'post' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/post'; ?>">Post</a></li>
 						<li><a class="text-custom" href="#search">Search</a></li>
 					</ul>
 				</div>			
 				
-				<?php if ( !isset($_SESSION['username']) ) { ?>
+				<?php if ( $this->session->userdata('user') == NULL) { ?>
 					<div class="btn-group pull-right">
 						<a class="btn" href="<?php echo site_url('login'); ?>"> <i
 							class="icon-user"></i> Login <span class="caret"></span>
@@ -82,7 +82,7 @@ body {
 				<?php } else { ?>
 					<div class="btn-group pull-right">
 						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						    <i class="icon-user"></i> <?php echo $_SESSION['username']; ?>
+						    <i class="icon-user"></i> <?php echo $this->session->userdata('user')['username']; ?>
 						    <span class="caret"></span>
 						</a>
 						

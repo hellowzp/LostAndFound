@@ -1,16 +1,26 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
 class Home extends CI_Controller {
 
+	// The controller constructor will be called for each client request
     function __construct() {
         parent::__construct();	
         
         $this->load->helper(array('form', 'url', 'file'));
-		$this->load->library('form_validation', 'upload');
+		$this->load->library(array('form_validation', 'upload', 'session'));
 		$this->load->model('m_lostfound');
 		
-		session_start();
-		$_SESSION['active-nav'] = 'home';
+//		session_start();
+//		session_unset();
+		$session_data = array(
+// 			'last_activity' => '',
+// 			'logged_in' => '',
+// 			'user' => '',
+//			'username' => '',
+			'active-nav' => 'home'
+		);
+		$this->session->set_userdata($session_data);
     }
 
 	public function index() {
@@ -18,18 +28,18 @@ class Home extends CI_Controller {
 	}
 	
 	public function lost($category="all") {
-		$_SESSION['active-nav'] = 'lost';
+		$this->session->set_userdata('active-nav', 'lost');
 		$this->lost_found("lost");
 	}
 	
 	public function found($category="all") {
-		$_SESSION['active-nav'] = 'found';
+		$this->session->set_userdata('active-nav', 'found');
 		$this->lost_found("found");
 	}
 
 	public function post($category="lost") {		
 		$data = array( 'table' => $category);
-		$_SESSION['active-nav'] = 'post';
+		$this->session->set_userdata('active-nav', 'post');
 		$this->load->view('post', $data);
 	}
 	
@@ -41,8 +51,10 @@ class Home extends CI_Controller {
 		$this->load->view('lost_found', $data);
 	}
 	
-	public function show_details($image='') {
-		
+	public function show_details($table='lost', $image='') {
+//		var_dump($image);
+		$results = $this->m_lostfound->get_stuff($table, $image);
+		var_dump($results);
 	}
 
 }

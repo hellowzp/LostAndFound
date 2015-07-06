@@ -9,7 +9,6 @@ class Post_Handler extends CI_Controller {
         $this->load->model('m_lostfound');
 
         $this->data = array();    
-        $this->img_ID = 0;
         
         $config ['upload_path'] = base_url() . 'img';
         $config ['allowed_types'] = 'gif|jpg|jpeg|png';
@@ -40,8 +39,8 @@ class Post_Handler extends CI_Controller {
 		);
 		
 		if ($this->form_validation->run()) {			
-			$this->img_ID ++;
-			$this->data['db']['image'] = '' . $this->img_ID .'_'. $this->data['db']['image'];
+			$rows = $this->m_lostfound->get_max_id($this->data['table']);
+			$this->data['db']['image'] = '' .$rows .'_'. $this->data['db']['image'];
 			
 			$source_temp = $_FILES['imgFile']['tmp_name'];
 			//target must be file system path instead of url connection like http://domain/path
@@ -71,4 +70,5 @@ class Post_Handler extends CI_Controller {
 		} 
 		return true;
 	}	
+	
 }

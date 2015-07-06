@@ -11,7 +11,7 @@ class Login extends CI_Controller {
         // Call the Controller constructor
         parent::__construct();
 		$this->load->model('m_user');
-		$this->load->library('form_validation');
+		$this->load->library('form_validation', 'session');
     }
 
 	// route /login
@@ -29,7 +29,6 @@ class Login extends CI_Controller {
 			if ($user = $this->m_user->get_by_username($username)) {
 				if ($this->m_user->check_password( $password, $user['password'] )) {
 					$this->m_user->allow_pass( $user );
-					$_SESSION['username'] = $username;
 					redirect('admin');
 				} else { 
 					$this->data['login_error'] = 'Invalid username or password'; 
@@ -69,9 +68,7 @@ class Login extends CI_Controller {
 	public function logout() {
 		$this->m_user->remove_pass();
 		$this->data['login_success'] = 'You have been logged out. Thank you.';
-		$this->load->view('login/v_login', $this->data);
-		
-		$_SESSION['username'] = '';
+		$this->load->view('login/v_login', $this->data);		
 	}
 	
 	// noaccess to show no access message

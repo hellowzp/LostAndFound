@@ -3,7 +3,7 @@
 class M_user extends CI_Model {
 
 	var $table = 'users';
-	var $max_idle_time = 300; // allowed idle time in secs, 300 secs = 5 minute
+	var $max_idle_time = 300; // session time out
 
     function __construct()
     {
@@ -34,12 +34,9 @@ class M_user extends CI_Model {
 		return false;
 	}
 	
-	// set login session
-	function allow_pass( $user_data ) {
-		$this->session->set_userdata( array( 'last_activity' => time(), 'logged_in' => 'yes', 'user' => $user_data ) );
-	}
-	
 	// Check if user is logged in and update session
+	// if logged in, userdata('user') refers to all the info 
+	// about the user stored in db
 	function is_logged_in() {
 		$last_activity = $this->session->userdata('last_activity');
 		$logged_in = $this->session->userdata('logged_in');
@@ -53,6 +50,11 @@ class M_user extends CI_Model {
 			$this->remove_pass();
 			return false;
 		}
+	}
+	
+	// set login session
+	function allow_pass( $user_data ) {
+		$this->session->set_userdata( array( 'last_activity' => time(), 'logged_in' => 'yes', 'user' => $user_data ) );
 	}
 	
 	// remove pass
