@@ -3,7 +3,12 @@
 <style>
 .galleryBox-wrapper {
 	width: 80%;
-	margin: 50px 10%;
+	margin: 50px 10% 20px;
+}
+
+.gallery-nav-links {
+	text-align: center;
+	font-size: 18px;
 }
 
 .galleryBox {
@@ -97,7 +102,7 @@ http://philipwalton.com/articles/what-no-one-told-you-about-z-index/
 			<?php  } ?>	
 		</div>
 		
-		<div class="gallery-nav"></div>
+		<div class="gallery-nav-links"><?php echo $links?></div>
 	<?php  } ?>
 </div>
 

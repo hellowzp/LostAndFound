@@ -22,9 +22,21 @@ class M_lostfound extends CI_Model {
 		return false;
 	}
 	
-	// get user by username
+	function record_count($table) {
+		return $this->db->count_all($table);
+	}
+	
+	function fetch_stuff($table, $limit, $start) {
+		$this->db->limit($limit, $start);
+		$query = $this->db->get($table);
+	
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		}
+		return false;
+	}
+	
 	function get_stuff( $table ) {
-//		$query = "select * from " .$table. " limit " .$this->offsets[$table]. "," .$this->limit;
 		$query = "select * from " .$table;
 		$result = $this->db->query($query);
 		if( $result->num_rows() > 0 ) {

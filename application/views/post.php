@@ -191,8 +191,8 @@ input[type="file"] {
 				}, false);
 
 				function handleFiles(files) {
-				    fileText.value = files[0].name;
-
+//				    fileText.value = files[0].name.replace(/\s/g, '_');
+					fileText.value = files[0].name;
 				    var reader = new FileReader();
 				    reader.onload = function(e) {
 				    	imageContainer.html('<img src="' + e.target.result + '" width=100% height=100%/>');

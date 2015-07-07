@@ -7,14 +7,15 @@ class Post_Handler extends CI_Controller {
         
         $this->load->library('form_validation');
         $this->load->model('m_lostfound');
+        $this->load->helper('security');
 
         $this->data = array();    
         
         $config ['upload_path'] = base_url() . 'img';
         $config ['allowed_types'] = 'gif|jpg|jpeg|png';
         $config ['max_size'] = '4096';  //KB
-        $config ['max_width'] = '1024';
-        $config ['max_height'] = '768';
+        $config ['max_width'] = '1920';
+        $config ['max_height'] = '1080';
         
         $this->load->library ( 'upload', $config );
     }
@@ -22,11 +23,8 @@ class Post_Handler extends CI_Controller {
 	public function index() {
 		
 		$this->form_validation->set_rules('name', 'Name', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'trim|xss_clean|valid_email');
+		$this->form_validation->set_rules('email', 'Email', 'required|trim|xss_clean|valid_email');
 		$this->form_validation->set_rules('image', "Image", 'callback_upload_file_check');
-		
-// 		var_dump($_FILES);
-// 		var_dump($_POST);
 
 		$this->data['table'] = $this->input->post('type');
 		$this->data['db'] = array(
@@ -39,9 +37,12 @@ class Post_Handler extends CI_Controller {
 		);
 		
 		if ($this->form_validation->run()) {			
+			// ensure the file name is unique by adding a id prefix
+			// and remove all special characters to make it safe for url request
 			$rows = $this->m_lostfound->get_max_id($this->data['table']);
-			$this->data['db']['image'] = '' .$rows .'_'. $this->data['db']['image'];
-			
+			$this->data['db']['image'] = $rows . '_'
+				. preg_replace('/[^A-Za-z0-9\.]/', '', $this->data['db']['image']);
+					
 			$source_temp = $_FILES['imgFile']['tmp_name'];
 			//target must be file system path instead of url connection like http://domain/path
 			$target_path = dirname( dirname( dirname(__FILE__) ) )

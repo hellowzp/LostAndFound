@@ -19,7 +19,7 @@
     -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
     max-width: 600px;
-    max-height: 450px
+    max-height: 450px;
 }
 
 .image-details .details {
