@@ -1,5 +1,3 @@
-
--- Dumping structure for table howframework.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
@@ -35,6 +33,3 @@ CREATE TABLE IF NOT EXISTS `found` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
-/*!40014 SET FOREIGN_KEY_CHECKS=1 */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
