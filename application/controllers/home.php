@@ -10,22 +10,10 @@ class Home extends CI_Controller {
 		$this->load->library(array('form_validation', 'upload', 'session', 'pagination'));
 		$this->load->model('m_lostfound');
 
-		// The controller constructor will be called for each client request		
-//		session_start();
-//		session_unset();
-//		$session_data = array(
-// 			'last_activity' => '',
-// 			'logged_in' => '',
-// 			'user' => '',
-//			'username' => '',
-//			'active-nav' => 'home'
-//		);
-//		$this->session->set_userdata($session_data);
-
+		// The controller constructor will be called for each client request
 		if ( $this->session->userdata('active-nav') == NULL) {
 			$this->session->set_userdata('active-nav', 'home');
-		}
-		
+		}		
     }
 
 	public function index() {
@@ -48,15 +36,6 @@ class Home extends CI_Controller {
 		$this->session->set_userdata('active-nav', 'post');
 		$this->load->view('post', $data);
 	}
-
-	/*
-	private function lost_found($table) {
-		$results = $this->m_lostfound->get_stuff($table);
-//		var_dump($results);
-		//wrap the results in another array
-		$data = array( 'data' => $results, 'table' => $table);
-		$this->load->view('lost_found', $data);
-	} */
 	
 	private function lost_found($table) {
 		$config["base_url"] = site_url() . 'home' .'/'. $table;

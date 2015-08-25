@@ -3,12 +3,11 @@
 class Admin extends CI_Controller {
 	var $data = array();
 
-    function __construct()
-    {
+    function __construct() {
         // Call the Controller constructor
         parent::__construct();
 		
-		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+		header("Expires: Tue, 16 Sep 2015 05:00:00 GMT");
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 		header("Cache-Control: no-store, no-cache, must-revalidate");
 		header("Cache-Control: post-check=0, pre-check=0", false);
@@ -23,15 +22,11 @@ class Admin extends CI_Controller {
 			// is_logged_in also put user data in session
 			$this->data['user'] = $this->session->userdata('user');
 		}
-
     }
 
-	public function index()
-	{
+	public function index() {
 		$this->load->view('admin/v_admin_home', $this->data);
 	}
-	
-
 }
 
 /* End of file admin.php */

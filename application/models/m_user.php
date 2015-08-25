@@ -54,7 +54,13 @@ class M_user extends CI_Model {
 	
 	// set login session
 	function allow_pass( $user_data ) {
-		$this->session->set_userdata( array( 'last_activity' => time(), 'logged_in' => 'yes', 'user' => $user_data ) );
+		$this->session->set_userdata( 
+				array ( 
+					'last_activity' => time(),
+					'logged_in' => 'yes',
+					'user' => $user_data
+				)
+		);
 	}
 	
 	// remove pass

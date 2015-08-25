@@ -62,13 +62,24 @@ body {
 				<div class="span6" style="margin-left: 0; font-size: 24px;">
 					<a class="brand text-custom" href="<?php echo site_url(); ?>">Lost and Found</a>
 				</div>
-
+				
+				<!-- using $this when not in object context 
+				http://stackoverflow.com/questions/7181192/what-does-this-actually-mean-codeigniter
+				$this represents the singleton Codeigniter instance (the controller object).
+				Another way to get this instance is using the get_instance() function.
+				-->
+				<?php function get_href_class($param) {
+					$controller = get_instance();
+					return $controller->session->userdata('active-nav') 
+							== $param ? "active-custom" : "text-custom";
+				}?>
+				
 				<div class="nav-collapse">
 					<ul class="nav" style="margin-left: 100px;">
-						<li><a class="<?php echo $this->session->userdata('active-nav') == 'home' ? "active-custom" : "text-custom";?>" href="<?php echo site_url(); ?>">Home</a></li>
-						<li><a class="<?php echo $this->session->userdata('active-nav') == 'lost' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/lost'; ?>">Lost</a></li>
-						<li><a class="<?php echo $this->session->userdata('active-nav') == 'found' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/found'; ?>">Found</a></li>
-						<li><a class="<?php echo $this->session->userdata('active-nav') == 'post' ? "active-custom" : "text-custom";?>" href="<?php echo site_url() . 'home/post'; ?>">Post</a></li>
+						<li><a class="<?php echo get_href_class("home"); ?>" href="<?php echo site_url(); ?>">Home</a></li>
+						<li><a class="<?php echo get_href_class("lost"); ?>" href="<?php echo site_url() . 'home/lost'; ?>">Lost</a></li>
+						<li><a class="<?php echo get_href_class("found");?>" href="<?php echo site_url() . 'home/found'; ?>">Found</a></li>
+						<li><a class="<?php echo get_href_class("post"); ?>" href="<?php echo site_url() . 'home/post'; ?>">Post</a></li>
 						<li><a class="text-custom" href="#search">Search</a></li>
 					</ul>
 				</div>			
