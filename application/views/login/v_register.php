@@ -9,7 +9,7 @@
 ?>
 
 <div class="span12 well" style="margin-top: 40px; margin-left: 200px; width: 50%">
-	<form class="form-horizontal" method="post" action="<?php echo site_url('register'); ?>">
+	<form class="form-horizontal" method="post" action="<?php echo site_url('login/register/' .$redirect ); ?>">
 	  <fieldset>
 	    <legend>Register</legend>
 		<div>&nbsp;</div>
@@ -66,7 +66,7 @@
 	  </fieldset>
 	</form>
 
-	<p><a href="<?php echo site_url('login'); ?>">Login</a></p>
+	<p><a href="<?php echo site_url('login/index/' .$redirect); ?>">Login</a></p>
 
 </div>
 					

@@ -8,7 +8,7 @@ $this->load->view('template/v_admin_header.php');
 <div class="span12 well" style="margin-top: 100px; margin-left: 300px; width: 40%">
 
 	<form class="form-horizontal" method="post"
-		  action="<?php echo site_url('login'); ?>">
+		  action="<?php echo site_url('login/index/' . $redirect); ?>">
 		<fieldset>
 			<legend>Login</legend>
 			<div>&nbsp;</div>
@@ -45,7 +45,7 @@ $this->load->view('template/v_admin_header.php');
 	</form>
 
 	<p>
-		<a href="<?php echo site_url('register'); ?>">Register</a>
+		<a href="<?php echo site_url('login/register/' . $redirect); ?>">Register</a>
 	</p>
 
 </div>

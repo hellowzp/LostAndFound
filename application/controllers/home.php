@@ -34,9 +34,8 @@ class Home extends CI_Controller {
 
 	public function post($category="lost") {
 		if ($this->m_user->is_logged_in() === FALSE) {
-			$this->m_user->remove_pass();
 			//redirect back to post if login succeed
-			redirect('login/redirect/home_post/Log in first to post');
+			redirect('login/index/home_post/Please login first to post');
 		} else{
 			$data = array( 'table' => $category);
 			$this->session->set_userdata('active-nav', 'post');

@@ -41,6 +41,8 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
+$route['home_lost'] = 'home/lost';
+$route['home_found'] = 'home/found';
 $route['home_post'] = 'home/post';
 $route['register'] = 'login/register';
 $route['logout'] = 'login/logout';
