@@ -79,7 +79,7 @@ http://philipwalton.com/articles/what-no-one-told-you-about-z-index/
 			<?php foreach ($data as $row) {
 				$name = $row['name'];
 				$description = $row['description'];
-				$image = base_url('img/uploads') .'/' . $row['image'];
+				$image = base_url('img/uploads') .'/'. $row['image'];
 			?>
 			<div class="galleryBox">
 				<a target="_blank" href="<?php echo $image;?>">

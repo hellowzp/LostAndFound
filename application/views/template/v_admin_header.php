@@ -86,8 +86,8 @@ body {
 				
 				<?php if ( $this->session->userdata('user') == NULL) { ?>
 					<div class="btn-group pull-right">
-						<a class="btn" href="<?php echo site_url('login'); ?>"> <i
-							class="icon-user"></i> Login <span class="caret"></span>
+						<a class="btn" href="<?php echo site_url('login'); ?>"> 
+							<i class="icon-user"></i> Login <span class="caret"></span>
 						</a>
 					</div>
 				<?php } else { ?>

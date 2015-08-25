@@ -12,12 +12,18 @@ class Login extends CI_Controller {
         parent::__construct();
 		$this->load->model('m_user');
 		$this->load->library('form_validation', 'session');
+		
+		if ( $this->session->userdata('redirect') == NULL) {
+			echo var_dump($_SESSION);
+			$this->session->set_userdata('redirect', 'admin');
+		}
     }
 
 	// route /login
 	public function index()
 	{
-		if ($this->m_user->is_logged_in()) { redirect('admin'); }
+		if ($this->m_user->is_logged_in()) 
+			redirect($this->session->userdata('redirect'));
 	
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -37,6 +43,37 @@ class Login extends CI_Controller {
 				$this->data['login_error'] = 'Username not found'; 
 			}
 		}
+		
+		$this->load->view('login/v_login', $this->data);
+	}
+	
+	public function redirect($redirect='admin', $msg='') {
+		$this->session->set_userdata('redirect', $redirect);
+		echo $this->session->userdata('redirect');
+		if ($this->m_user->is_logged_in()) 
+			redirect($this->session->userdata('redirect'));
+		
+		$this->data['login_success'] = urldecode($msg);
+		
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		
+		if ($this->form_validation->run()) {
+			$username = $this->input->post('username');
+			$password = $this->input->post('password');
+		
+			if ($user = $this->m_user->get_by_username($username)) {
+				if ($this->m_user->check_password( $password, $user['password'] )) {
+					$this->m_user->allow_pass( $user );
+					redirect('admin');
+				} else {
+					$this->data['login_error'] = 'Invalid username or password';
+				}
+			} else {
+				$this->data['login_error'] = 'Username not found';
+			}
+		}
+		
 		$this->load->view('login/v_login', $this->data);
 	}
 	

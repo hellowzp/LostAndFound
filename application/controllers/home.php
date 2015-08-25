@@ -8,9 +8,10 @@ class Home extends CI_Controller {
         
         $this->load->helper(array('form', 'url', 'file'));
 		$this->load->library(array('form_validation', 'upload', 'session', 'pagination'));
-		$this->load->model('m_lostfound');
+		$this->load->model(array('m_lostfound','m_user'));
 
 		// The controller constructor will be called for each client request
+		// and session data set in this controller will be reset
 		if ( $this->session->userdata('active-nav') == NULL) {
 			$this->session->set_userdata('active-nav', 'home');
 		}		
@@ -31,10 +32,16 @@ class Home extends CI_Controller {
 		$this->lost_found("found");
 	}
 
-	public function post($category="lost") {		
-		$data = array( 'table' => $category);
-		$this->session->set_userdata('active-nav', 'post');
-		$this->load->view('post', $data);
+	public function post($category="lost") {
+		if ($this->m_user->is_logged_in() === FALSE) {
+			$this->m_user->remove_pass();
+			//redirect back to post if login succeed
+			redirect('login/redirect/home_post/Log in first to post');
+		} else{
+			$data = array( 'table' => $category);
+			$this->session->set_userdata('active-nav', 'post');
+			$this->load->view('post', $data);
+		}			
 	}
 	
 	private function lost_found($table) {
@@ -59,6 +66,30 @@ class Home extends CI_Controller {
 //		var_dump($image);
 		$results = $this->m_lostfound->show_details($table, $image);
 		$this->load->view('show_details', array('data' => $results) );
+	}
+	
+	public function send_mail() {
+		$this->load->library('email');
+		$config = Array(
+			'protocol'  => 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'zpkx.wang@gmail.com',
+			'smtp_pass' => 'kaixin58bc',
+			'crlf'      => "\r\n",
+			'newline'   => "\r\n",
+		);
+		$this->email->initialize($config);
+		
+		$this->email->from($_POST['from'], 'Benchun');
+		$this->email->to($_POST['to']); 
+		
+		$this->email->subject($_POST['sbj']);
+		$this->email->message( urldecode( $_POST['msg'] ));	
+		
+		$this->email->send();
+		
+		echo $_POST['from'] . "Mail sent successfully.";
 	}
 	
 // 	public function init_pagination($uri,$total_rows,$per_page=10,$segment=4){
